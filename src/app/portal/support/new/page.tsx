@@ -170,5 +170,3 @@ export default function NewTicketPage() {
     </div>
   )
 }
-
-import { Loader2 } from 'lucide-react'

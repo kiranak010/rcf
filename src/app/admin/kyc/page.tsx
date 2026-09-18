@@ -136,5 +136,3 @@ export default function KYCReviewPage() {
     </div>
   )
 }
-
-import { ShieldCheck } from 'lucide-react'
