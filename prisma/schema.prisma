@@ -1,0 +1,375 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              String    @id @default(uuid())
+  email           String    @unique
+  name            String?
+  username        String?   @unique
+  password        String
+  role            String    @default("user") // SUPER_ADMIN, OPERATIONS_ADMIN, KYC_OFFICER, FINANCE_ADMIN, PARTNER, DEALER, INVESTOR, LOGISTICS
+  twoFactorEnabled Boolean   @default(false)
+  twoFactorSecret String?
+  isActive        Boolean   @default(true)
+  lastLoginAt     DateTime?
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  // Relations
+  partnerProfile  PartnerProfile?
+  notifications   Notification[]
+  auditLogs       AuditLog[]
+  supportTickets  SupportTicket[]
+  bankDetails     BankDetail[]
+}
+
+model Role {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  permissions String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model PartnerProfile {
+  id                String   @id @default(uuid())
+  userId            String   @unique
+  user              User     @relation(fields: [userId], references: [id])
+  partnerId         String   @unique
+  businessName      String
+  contactPerson     String
+  mobile            String
+  email             String
+  registeredAddress String
+  businessAddress   String
+  state             String
+  district          String
+  city              String
+  pinCode           String
+  businessType      String   // Proprietorship, Partnership, Private Limited, etc.
+  onboardingStep    Int      @default(1)
+  status            String   @default("PENDING") // PENDING, UNDER_REVIEW, VERIFIED, REJECTED
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+
+  // Relations
+  kycDocuments     KYCDocument[]
+  bankDetails       BankDetail[]
+  stockRequests     StockRequest[]
+  orders            Order[]
+  shipments         Shipment[]
+}
+
+model KYCDocument {
+  id              String   @id @default(uuid())
+  partnerProfileId String
+  partnerProfile   PartnerProfile @relation(fields: [partnerProfileId], references: [id])
+  docType         String   // PAN, GST, Aadhaar, License, etc.
+  filePath        String
+  status          String   @default("UPLOADED") // UPLOADED, UNDER_VERIFICATION, VERIFIED, REJECTED
+  verifiedBy      String?
+  verifiedAt      DateTime?
+  rejectionReason String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model BankDetail {
+  id              String   @id @default(uuid())
+  partnerProfileId String
+  partnerProfile   PartnerProfile @relation(fields: [partnerProfileId], references: [id])
+  userId           String
+  user             User     @relation(fields: [userId], references: [id])
+  accountHolder   String
+  bankName        String
+  branch          String
+  accountNumber   String
+  ifsc            String
+  accountType     String
+  status          String   @default("PENDING") // PENDING, VERIFIED
+  verifiedBy      String?
+  verifiedAt      DateTime?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model StockRequest {
+  id              String   @id @default(uuid())
+  partnerProfileId String
+  partnerProfile   PartnerProfile @relation(fields: [partnerProfileId], references: [id])
+  productId       String
+  quantity        Float
+  unit            String
+  requiredDate    DateTime
+  priority        String   @default("NORMAL") // NORMAL, HIGH, URGENT
+  deliveryLocation String
+  remarks         String?
+  status          String   @default("SUBMITTED") // SUBMITTED, UNDER_REVIEW, APPROVED, PARTIALLY_APPROVED, REJECTED, DISPATCHED, COMPLETED
+  requestId       String   @unique
+  approvedQty     Float?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model StockTransaction {
+  id              String   @id @default(uuid())
+  productId       String
+  partnerProfileId String
+  quantity        Float
+  type            String   // RECEIVED, ISSUED, ADJUSTED, RETURNED, RESERVED
+  referenceId     String?  // OrderId or RequestId
+  balance         Float
+  createdAt       DateTime @default(now())
+}
+
+model Order {
+  id              String   @id @default(uuid())
+  partnerProfileId String
+  partnerProfile   PartnerProfile @relation(fields: [partnerProfileId], references: [id])
+  orderId         String   @unique
+  amount          Float
+  paymentStatus   String   @default("PENDING") // PENDING, PAID, PARTIAL, OVERDUE
+  dispatchStatus  String   @default("PENDING") // PENDING, READY, DISPATCHED, DELIVERED
+  deliveryStatus  String   @default("PENDING")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  orderItems      OrderItem[]
+  shipments       Shipment[]
+}
+
+model OrderItem {
+  id        String   @id @default(uuid())
+  orderId   String
+  order     Order    @relation(fields: [orderId], references: [id])
+  productId String
+  quantity  Float
+  price     Float
+}
+
+model Shipment {
+  id              String   @id @default(uuid())
+  orderId         String
+  order           Order    @relation(fields: [orderId], references: [id])
+  partnerProfileId String
+  partnerProfile   PartnerProfile @relation(fields: [partnerProfileId], references: [id])
+  trackingId      String   @unique
+  transporter     String?
+  vehicleRef      String?
+  origin          String
+  destination     String
+  dispatchDate    DateTime?
+  expectedDelivery DateTime?
+  currentStatus   String   @default("READY") // READY, DISPATCHED, IN_TRANSIT, AT_HUB, OUT_FOR_DELIVERY, DELIVERED
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  events          ShipmentEvent[]
+}
+
+model ShipmentEvent {
+  id          String   @id @default(uuid())
+  shipmentId  String
+  shipment    Shipment @relation(fields: [shipmentId], references: [id])
+  status      String
+  location    String?
+  timestamp   DateTime @default(now())
+  updatedBy   String?
+}
+
+model FarmerScheme {
+  id              String   @id @default(uuid())
+  schemeName      String
+  provider        String
+  eligibility     String
+  benefits        String
+  docsRequired    String
+  howToApply      String
+  officialSource  String
+  lastUpdated     DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id])
+  message   String
+  type      String   // SYSTEM, ORDER, STOCK, FINANCE, KYC
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+}
+
+model AuditLog {
+  id        String   @id @default(uuid())
+  userId    String?
+  user      User?    @relation(fields: [userId], references: [id])
+  action    String
+  entity    String?
+  entityId  String?
+  prevValue String?
+  newValue  String?
+  ipAddress String?
+  createdAt DateTime @default(now())
+}
+
+model SupportTicket {
+  id          String   @id @default(uuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id])
+  category    String
+  subject     String
+  description String
+  priority    String   @default("NORMAL")
+  status      String   @default("OPEN") // OPEN, ASSIGNED, IN_PROGRESS, WAITING_FOR_USER, RESOLVED, CLOSED
+  assignedTo  String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  messages    TicketMessage[]
+}
+
+model TicketMessage {
+  id          String   @id @default(uuid())
+  ticketId    String
+  ticket      SupportTicket @relation(fields: [ticketId], references: [id])
+  senderId    String
+  message     String
+  createdAt   DateTime @default(now())
+}
+
+// Existing Models (preserved)
+model Announcement {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  category    String?
+  date        DateTime @default(now())
+  status      String   @default("published")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Tender {
+  id              String   @id @default(uuid())
+  title           String
+  description     String?
+  referenceNumber String?
+  deadline        DateTime?
+  estimatedValue  String?
+  status          String   @default("active")
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Recruitment {
+  id               String   @id @default(uuid())
+  title            String
+  description      String?
+  department       String?
+  location         String?
+  jobTitle         String?
+  closingDate      DateTime?
+  advertisementNo  String?
+  qualification    String?
+  experience       String?
+  openingDate      DateTime?
+  jobDescription   String?
+  status           String   @default("published")
+  type             String   @default("vacancy")
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String
+  slug        String   @unique
+  description String?
+  category    String?
+  image       String?
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model News {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  category    String?
+  image       String?
+  date        DateTime @default(now())
+  status      String   @default("published")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Document {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  category    String?
+  fileUrl     String?
+  fileName    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactEnquiry {
+  id        String   @id @default(uuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model HomepageContent {
+  id           String   @id @default("homepage")
+  heroTitle    String?
+  heroSubtitle String?
+  heroDescription String?
+  heroImage    String?
+  updatedAt    DateTime @updatedAt
+}
+
+model MediaFile {
+  id        String   @id @default(uuid())
+  fileName  String
+  url       String
+  mimeType  String?
+  size      Int?
+  createdAt DateTime @default(now())
+}
+
+model SiteSettings {
+  key       String   @id
+  value     String
+  updatedAt DateTime @updatedAt
+}
+
+model Backup {
+  id        String   @id @default(uuid())
+  filename  String
+  size      Int?
+  createdAt DateTime @default(now())
+}
+
+model Page {
+  id          String   @id @default(uuid())
+  title       String
+  slug        String   @unique
+  content     String?
+  status      String   @default("draft")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

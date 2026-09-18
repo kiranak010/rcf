@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --rcf-green: #15803d;
+  --rcf-green-dark: #166534;
+  --rcf-leaf: #16a34a;
+  --rcf-earth: #78350f;
+  --rcf-soil: #92400e;
+  --rcf-gold: #eab308;
+  --rcf-harvest: #f59e0b;
+  --rcf-sky: #0ea5e9;
+  --rcf-navy: #1e3a8a;
+  --rcf-navy-dark: #1e40af;
+  --rcf-gray-50: #f8fafc;
+  --rcf-gray-100: #f1f5f9;
+  --rcf-gray-200: #e2e8f0;
+  --rcf-gray-300: #cbd5e1;
+  --rcf-gray-600: #475569;
+  --rcf-gray-700: #334155;
+  --rcf-gray-800: #1e293b;
+  --rcf-gray-900: #0f172a;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Roboto', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.45;
+  color: var(--rcf-gray-900);
+  background-color: #ffffff;
+  font-size: 14px;
+}
+
+.container-custom {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+}
+
+@media (max-width: 768px) {
+  .container-custom {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
+
+.section-padding {
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .section-padding {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--rcf-green-dark);
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
+  border-bottom: 2px solid var(--rcf-green);
+  padding-bottom: 0.35rem;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  color: var(--rcf-gray-600);
+  max-width: 900px;
+  margin-top: 0.5rem;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.25rem;
+  background-color: var(--rcf-green);
+  color: #ffffff;
+  font-weight: 600;
+  border-radius: 0;
+  transition: background-color 150ms ease;
+  text-decoration: none;
+  font-size: 0.875rem;
+  border: 1px solid var(--rcf-green-dark);
+}
+
+.btn-primary:hover {
+  background-color: var(--rcf-green-dark);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.6rem 1.25rem;
+  background-color: #ffffff;
+  color: var(--rcf-green-dark);
+  font-weight: 600;
+  border: 1px solid var(--rcf-green);
+  border-radius: 0;
+  transition: all 150ms ease;
+  text-decoration: none;
+  font-size: 0.875rem;
+}
+
+.btn-secondary:hover {
+  background-color: var(--rcf-green);
+  color: #ffffff;
+}
+
+.card-base {
+  background-color: #ffffff;
+  border-radius: 0;
+  border: 1px solid var(--rcf-gray-200);
+  transition: box-shadow 150ms ease;
+}
+
+.card-base:hover {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  color: var(--rcf-green-dark);
+  font-weight: 600;
+  text-decoration: none;
+  transition: gap 150ms ease;
+}
+
+.link-arrow:hover {
+  gap: 0.25rem;
+  text-decoration: underline;
+}
+
+.govt-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.75rem;
+  background-color: #fef3c7;
+  border: 1px solid var(--rcf-gold);
+  color: var(--rcf-earth);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.stat-card {
+  background: #ffffff;
+  color: var(--rcf-green-dark);
+  padding: 1.25rem;
+  text-align: center;
+  border-radius: 0;
+  border: 1px solid var(--rcf-gray-200);
+}
+
+.stat-card .stat-value {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+
+.stat-card .stat-label {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--rcf-gray-600);
+}
+
+.hero-section {
+  position: relative;
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, var(--rcf-green) 0%, var(--rcf-green-dark) 100%);
+  overflow: hidden;
+  color: #ffffff;
+  border-bottom: 3px solid var(--rcf-gold);
+}
+
+.saffron-stripe {
+  height: 4px;
+  background: linear-gradient(to right, var(--rcf-gold), var(--rcf-harvest), var(--rcf-gold));
+}
+
+.govt-header-bar {
+  background: var(--rcf-green-dark);
+  color: #ffffff;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+}
+
+.govt-mega-menu {
+  border-top: 1px solid var(--rcf-gray-200);
+  border-bottom: 1px solid var(--rcf-gray-200);
+  background: #ffffff;
+}
+
+.govt-mega-menu a {
+  color: var(--rcf-gray-700);
+}
+
+.govt-mega-menu a:hover {
+  color: var(--rcf-green-dark);
+}
+
+.govt-footer {
+  background: var(--rcf-gray-900);
+  color: #cbd5e1;
+  border-top: 4px solid var(--rcf-gold);
+}
+
+.govt-footer a {
+  color: #94a3b8;
+  text-decoration: none;
+}
+
+.govt-footer a:hover {
+  color: #ffffff;
+}
+
+.govt-section-heading {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--rcf-green-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 0.5rem;
+}
+
+.govt-panel {
+  border: 1px solid var(--rcf-gray-200);
+  background: #ffffff;
+  padding: 0.75rem;
+}
+
+.govt-table th {
+  background: var(--rcf-green-dark);
+  color: #ffffff;
+  font-weight: 600;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid rgba(255,255,255,0.15);
+  font-size: 0.875rem;
+}
+
+.govt-table td {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--rcf-gray-200);
+  font-size: 0.875rem;
+  color: var(--rcf-gray-800);
+}
+
+.govt-table tr:nth-child(even) td {
+  background: var(--rcf-gray-50);
+}
+
+.govt-border-block {
+  border: 1px solid var(--rcf-gray-200);
+  padding: 0.75rem;
+  background: #ffffff;
+}
+
+.govt-divider {
+  border: 0;
+  border-top: 1px solid var(--rcf-gray-200);
+  margin: 1rem 0;
+}
+
+@layer utilities {
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+}
+
+.agri-hero-bg {
+  background: linear-gradient(135deg, var(--rcf-green) 0%, var(--rcf-leaf) 100%);
+}
+
+.agri-section-bg {
+  background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+}
