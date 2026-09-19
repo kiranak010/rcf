@@ -193,6 +193,7 @@ model FarmerScheme {
   howToApply      String
   officialSource  String
   lastUpdated     DateTime @default(now())
+  createdAt       DateTime @default(now())
   updatedAt       DateTime @updatedAt
 }
 
@@ -215,6 +216,7 @@ model AuditLog {
   entityId  String?
   prevValue String?
   newValue  String?
+  details   String?
   ipAddress String?
   createdAt DateTime @default(now())
 }
@@ -372,4 +374,26 @@ model Page {
   status      String   @default("draft")
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+model ActivityLog {
+  id        String   @id @default(uuid())
+  action    String
+  entity    String?
+  entityId  String?
+  userId    String?
+  details   String?
+  createdAt DateTime @default(now())
+}
+
+model CitizenUser {
+  id          String    @id @default(uuid())
+  email       String    @unique
+  name        String?
+  phone       String?
+  password    String
+  isActive    Boolean   @default(true)
+  lastLoginAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
 }

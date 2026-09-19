@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server'
+import type { NextRequest } from 'next/server'
 import { verifyToken } from '@/lib/auth'
 import { prisma } from '@/lib/prisma'
 
-export async function GET(request: Request) {
+export async function GET(request: NextRequest) {
   const token = request.cookies.get('rcf-enterprise-session')?.value
 
   if (!token) {

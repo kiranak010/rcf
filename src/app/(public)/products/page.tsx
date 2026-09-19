@@ -9,15 +9,21 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<any[]>([])
 
   useEffect(() => {
-    fetch('/api/products').then((res) => res.json()).then((data) => setProducts(data.items || []))
+    fetch('/api/products').then((res) => res.json()).then((data) => {
+      setProducts(data.items || [])
+    })
   }, [])
 
   const categories = [
-    { name: 'Fertilizers', count: 45, description: 'Urea, complex fertilizers, and specialty blends for agriculture.' },
-    { name: 'Industrial Chemicals', count: 30, description: 'Methanol, formic acid, and other industrial chemicals.' },
-    { name: 'Ammonia & Intermediates', count: 15, description: 'Ammonia and related intermediates for downstream industries.' },
-    { name: 'Specialty Products', count: 10, description: 'High-performance specialty products for niche applications.' },
+    { name: 'Fertilizer', description: 'Urea, complex fertilizers, and specialty blends for agriculture.' },
+    { name: 'Industrial', description: 'Methanol, formic acid, and other industrial chemicals.' },
+    { name: 'Ammonia', description: 'Ammonia and related intermediates for downstream industries.' },
+    { name: 'Specialty', description: 'High-performance specialty products for niche applications.' },
   ]
+
+  const getCategoryCount = (categoryName: string) => {
+    return products.filter(p => p.category?.toLowerCase().includes(categoryName.toLowerCase())).length
+  }
 
   return (
     <div className="min-h-screen">
@@ -47,7 +53,7 @@ export default function ProductsPage() {
             {categories.map((category, index) => (
               <Link key={index} href={`/products/${category.name.toLowerCase()}`} className="govt-border-block group flex items-start gap-4">
                 <div className="w-10 h-10 bg-gray-100 border border-gray-200 flex items-center justify-center flex-shrink-0">
-                  <span className="text-xs font-bold text-gray-600">{category.count}</span>
+                  <span className="text-xs font-bold text-gray-600">{getCategoryCount(category.name)}</span>
                 </div>
                 <div>
                   <h3 className="text-sm font-bold text-gray-900 group-hover:text-primary mb-1">{category.name}</h3>

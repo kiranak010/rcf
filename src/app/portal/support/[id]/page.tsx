@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Send, User, ShieldCheck, Clock, AlertCircle } from 'lucide-react'
+import { ArrowLeft, Send, User, ShieldCheck, Clock, AlertCircle, Loader2, MessageSquare } from 'lucide-react'
 
 interface Ticket {
   id: string
@@ -10,6 +10,7 @@ interface Ticket {
   category: string
   priority: string
   status: string
+  userId: string
   createdAt: string
 }
 
@@ -211,5 +212,3 @@ export default function TicketConversation({ params }: { params: { id: string } 
     </div>
   )
 }
-
-import { Loader2, MessageSquare } from 'lucide-react'

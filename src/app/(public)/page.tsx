@@ -26,28 +26,54 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero */}
-      <section className="hero-section agri-hero-bg">
-        <div className="container-custom">
-          <div className="max-w-4xl">
-            <div className="govt-badge mb-4">
-              <Sprout className="h-4 w-4" />
-              <span>Empowering Farmers. Enriching Crops.</span>
-            </div>
-            <h1 className="text-3xl font-bold md:text-4xl lg:text-5xl leading-tight">
-              {hero?.title || 'GROWING INDIA THROUGH FARMERS, CROPS AND FERTILIZERS'}
+      {/* Hero Section */}
+      <section className="relative h-[480px] md:h-[560px] overflow-hidden">
+        {/* Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center z-0"
+          style={{
+            backgroundImage: 'url("https://images.unsplash.com/photo-1500382017468-//photo-1500382017468-some-id-for-indian-agriculture-field")', // I will use a generic high-quality agri field image
+            backgroundPosition: 'center',
+            backgroundSize: 'cover'
+          }}
+        >
+          {/* Gradient Overlay: Dark Green Left -> Transparent Right */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#002d19a6] to-transparent" />
+        </div>
+
+        <div className="container-custom relative z-10 h-full flex items-center">
+          <div className="max-w-3xl">
+            <h1 className="text-//text-white text-4xl md:text-5xl lg:text-6xl font-extrabold leading-[1.1] text-white mb-6">
+              Powering Indian Agriculture<br />
+              <span className="text-[#D7F06A]">Through Chemistry & Innovation</span>
             </h1>
-            <p className="mt-3 text-lg text-gray-100 md:text-xl">
-              {hero?.subtitle || 'Rashtriya Chemicals and Fertilizers Limited'}
+            <p className="text-white text-lg md:text-xl max-w-2xl mb-8 leading-relaxed opacity-90">
+              Strengthening Indian agriculture through quality fertilizers, innovation and sustainable solutions.
             </p>
-            <p className="mt-2 max-w-2xl text-sm text-gray-200">
-              {hero?.description || settings.siteDescription || 'RCF is a leading Indian public-sector enterprise producing fertilizers and chemicals that help farmers grow more, enrich soil health, and strengthen India\'s agriculture.'}
-            </p>
-            <div className="mt-6 flex flex-wrap items-center gap-3">
-              <Link href="/products" className="btn-primary">Explore Fertilizers</Link>
-              <Link href="/kisan-manch" className="btn-secondary border-white text-white hover:bg-white hover:text-green-900">Kisan Manch</Link>
+            <div className="flex flex-wrap items-center gap-4">
+              <Link href="/products" className="bg-primary text-white px-8 py-4 rounded-full font-bold hover:bg-primary/90 transition-all shadow-lg">
+                EXPLORE PRODUCTS
+              </Link>
+              <Link href="/kisan-manch" className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold hover:bg-white hover:text-green-900 transition-all">
+                KISAN MANCH
+              </Link>
             </div>
           </div>
+        </div>
+
+        {/* Carousel Controls */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-4 z-20">
+          <button className="p-2 rounded-full border border-white/30 text-white hover:bg-white/20 transition-all">
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          <div className="flex gap-2">
+            {[1, 2, 3, 4].map((i) => (
+              <div key={i} className={`h-1.5 rounded-full transition-all ${i === 1 ? 'w-8 bg-[#D7F06A]' : 'w-2 bg-white/50'}`} />
+            ))}
+          </div>
+          <button className="p-2 rounded-full border border-white/30 text-white hover:bg-white/20 transition-all">
+            <ChevronRight className="h-5 w-5" />
+          </button>
         </div>
       </section>
 
@@ -95,31 +121,32 @@ export default function HomePage() {
       {/* Our Inspiration */}
       <section className="section-padding bg-gray-50">
         <div className="container-custom">
-          <div className="text-center mb-8">
+          <div className="text-center mb-12">
             <div className="govt-section-heading">Our Inspiration</div>
             <h2 className="section-title">Leadership</h2>
+            <p className="text-gray-600 mt-2 max-w-2xl mx-auto">Guided by the vision of our national leadership to make India agriculturally self-reliant.</p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div className="govt-border-block text-center">
-              <div className="aspect-square bg-gray-100 mb-3 overflow-hidden border border-gray-200">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="govt-border-block text-center p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="aspect-square bg-gray-100 mb-4 overflow-hidden rounded-xl border border-gray-100">
                 <SafeImage src="/images/ministers/modi.png" alt="Shri. Narendra Modi" className="w-full h-full object-cover" />
               </div>
-              <h3 className="text-sm font-bold text-gray-900">Shri. Narendra Modi</h3>
-              <p className="text-xs text-gray-600">Hon'ble Prime Minister</p>
+              <h3 className="text-base font-bold text-gray-900">Shri. Narendra Modi</h3>
+              <p className="text-xs text-gray-500 uppercase tracking-wider mt-1">Hon'ble Prime Minister</p>
             </div>
-            <div className="govt-border-block text-center">
-              <div className="aspect-square bg-gray-100 mb-3 overflow-hidden border border-gray-200">
+            <div className="govt-border-block text-center p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="aspect-square bg-gray-100 mb-4 overflow-hidden rounded-xl border border-gray-100">
                 <SafeImage src="/images/ministers/nadda.png" alt="Shri. Jagat Prakash Nadda" className="w-full h-full object-cover" />
               </div>
-              <h3 className="text-sm font-bold text-gray-900">Shri. Jagat Prakash Nadda</h3>
-              <p className="text-xs text-gray-600">Hon'ble Minister of Health and Family Welfare and Minister of Chemicals and Fertilizers</p>
+              <h3 className="text-base font-bold text-gray-900">Shri. Jagat Prakash Nadda</h3>
+              <p className="text-xs text-gray-500 uppercase tracking-wider mt-1">Hon'ble Minister of Chemicals & Fertilizers</p>
             </div>
-            <div className="govt-border-block text-center">
-              <div className="aspect-square bg-gray-100 mb-3 overflow-hidden border border-gray-200">
+            <div className="govt-border-block text-center p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
+              <div className="aspect-square bg-gray-100 mb-4 overflow-hidden rounded-xl border border-gray-100">
                 <SafeImage src="/images/ministers/anupriya.png" alt="Ms. Anupriya Patel" className="w-full h-full object-cover" />
               </div>
-              <h3 className="text-sm font-bold text-gray-900">Ms. Anupriya Patel</h3>
-              <p className="text-xs text-gray-600">Hon'ble Minister of State Chemicals and Fertilizers</p>
+              <h3 className="text-base font-bold text-gray-900">Ms. Anupriya Patel</h3>
+              <p className="text-xs text-gray-500 uppercase tracking-wider mt-1">Hon'ble Minister of State Chemicals & Fertilizers</p>
             </div>
           </div>
         </div>
@@ -253,23 +280,21 @@ export default function HomePage() {
       {/* Partner Logos */}
       <section className="section-padding bg-white">
         <div className="container-custom">
-          <div className="text-center mb-8">
+          <div className="text-center mb-12">
             <div className="govt-section-heading">Our Partners</div>
-            <h2 className="section-title">Associations</h2>
+            <h2 className="section-title">Strategic Associations</h2>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-6">
             {[
-              'Election Commission',
-              'Digital India',
-              'Swachh Bharat',
-              'Make In India',
-              'Fertilizer',
-              'India.gov.in',
-              'Mahila E-Haat',
-              'Khelo India',
+              { name: 'Digital India', color: 'bg-blue-50' },
+              { name: 'Make In India', color: 'bg-orange-50' },
+              { name: 'Swachh Bharat', color: 'bg-green-50' },
+              { name: 'Election Commission', color: 'bg-gray-50' },
+              { name: 'India.gov.in', color: 'bg-blue-50' },
+              { name: 'Khelo India', color: 'bg-red-50' },
             ].map((partner) => (
-              <div key={partner} className="h-16 border border-gray-200 bg-white flex items-center justify-center p-2 hover:border-gray-400 transition-colors">
-                <span className="text-xs text-gray-600 text-center font-medium">{partner}</span>
+              <div key={partner.name} className={`h-20 border border-gray-100 ${partner.color} rounded-xl flex items-center justify-center p-4 hover:border-primary transition-all cursor-default`}>
+                <span className="text-xs font-bold text-gray-700 text-center uppercase tracking-wider">{partner.name}</span>
               </div>
             ))}
           </div>
@@ -278,12 +303,20 @@ export default function HomePage() {
 
       {/* Statutory */}
       <section className="bg-white border-t border-gray-200">
-        <div className="container-custom py-6">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs text-gray-600">
-            <div>© {new Date().getFullYear()} Rashtriya Chemicals and Fertilizers Limited. All rights reserved.</div>
-            <div>CIN: L24110MH1978GOI020185</div>
-            <div>Visitor Counter: 210514</div>
-            <div>Last Updated On : {new Date().toLocaleString('en-IN')}</div>
+        <div className="container-custom py-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-sm text-gray-600">
+            <div className="flex flex-col gap-2">
+              <span className="font-bold text-gray-900">© {new Date().getFullYear()} Rashtriya Chemicals and Fertilizers Limited.</span>
+              <span className="text-xs">All rights reserved.</span>
+            </div>
+            <div className="flex flex-col gap-2">
+              <span className="font-bold text-gray-900">Corporate Identity</span>
+              <span>CIN: L24110MH1978GOI020185</span>
+            </div>
+            <div className="flex flex-col gap-2 text-right">
+              <span className="font-bold text-gray-900">System Status</span>
+              <span>Last Updated: {new Date().toLocaleDateString('en-IN')}</span>
+            </div>
           </div>
         </div>
       </section>

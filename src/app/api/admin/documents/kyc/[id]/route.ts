@@ -13,7 +13,7 @@ export async function GET(request: Request, { params }: { params: { id: string }
   }
 
   try {
-    const doc = await prisma.kycDocument.findUnique({
+    const doc = await prisma.kYCDocument.findUnique({
       where: { id: params.id }
     })
 

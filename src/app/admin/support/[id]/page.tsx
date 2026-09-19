@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
-import { ArrowLeft, Send, User, ShieldCheck, Clock, AlertCircle, Save } from 'lucide-react'
+import { ArrowLeft, Send, User, ShieldCheck, Clock, AlertCircle, Save, Loader2, MessageSquare } from 'lucide-react'
 
 interface Ticket {
   id: string
@@ -11,6 +11,7 @@ interface Ticket {
   priority: string
   status: string
   assignedTo: string | null
+  userId: string
   createdAt: string
   user: {
     name: string
@@ -295,4 +296,3 @@ export default function AdminTicketManagement({ params }: { params: { id: string
   )
 }
 
-import { Loader2, MessageSquare } from 'lucide-react'

@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { CheckCircle2, Circle, ArrowRight, ArrowLeft, Upload, FileText, User, Building2, CreditCard, Camera, PenTool } from 'lucide-react'
+import { CheckCircle2, Circle, ArrowRight, ArrowLeft, Upload, FileText, User, Building2, CreditCard, Camera, PenTool, Loader2 } from 'lucide-react'
 
 const ONBOARDING_STEPS = [
   { id: 1, title: 'Basic Information', icon: User },
