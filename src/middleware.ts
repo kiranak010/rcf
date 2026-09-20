@@ -13,28 +13,28 @@ export function middleware(request: NextRequest) {
 
   // 1. Handle Admin routes
   if (pathname.startsWith('/admin')) {
-    if (!token) {
+    if (isLoginPage) {
+      if (token) {
+        return NextResponse.redirect(new URL('/admin', request.url))
+      }
+    } else if (!token) {
       return NextResponse.redirect(new URL('/admin/login', request.url))
-    }
-
-    const decoded = verifyToken(token)
-    if (!decoded || !decoded.role.includes('ADMIN')) {
-      return NextResponse.redirect(new URL('/portal/login', request.url))
-    }
-
-    if (isLoginPage && token) {
-      return NextResponse.redirect(new URL('/admin', request.url))
+    } else {
+      const decoded = verifyToken(token)
+      if (!decoded || !decoded.role.includes('ADMIN')) {
+        return NextResponse.redirect(new URL('/portal/login', request.url))
+      }
     }
   }
 
   // 2. Handle Portal routes
   if (pathname.startsWith('/portal')) {
-    if (!token) {
+    if (isLoginPage) {
+      if (token) {
+        return NextResponse.redirect(new URL('/portal', request.url))
+      }
+    } else if (!token) {
       return NextResponse.redirect(new URL('/portal/login', request.url))
-    }
-
-    if (isLoginPage && token) {
-      return NextResponse.redirect(new URL('/portal', request.url))
     }
   }
 

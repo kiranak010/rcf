@@ -6,10 +6,10 @@ import { ChevronRight, Leaf, FlaskConical, Award, Globe, Package, Sprout } from 
 import SafeImage from '@/components/public/SafeImage'
 
 const sampleProducts: any[] = [
-  { id: '1', name: 'Urea', category: 'Fertilizer', slug: 'urea', image: '/images/products/product1.png', description: 'High-grade urea for nitrogen nutrition in crops' },
-  { id: '2', name: 'DAP', category: 'Fertilizer', slug: 'dap', image: '/images/products/product2.png', description: 'Diammonium Phosphate for phosphorus and nitrogen' },
-  { id: '3', name: 'Ammonium Sulphate', category: 'Chemical', slug: 'ammonium-sulphate', image: '/images/products/product3.png', description: 'Industrial-grade ammonium sulphate' },
-  { id: '4', name: 'Methanol', category: 'Chemical', slug: 'methanol', image: '/images/products/product4.png', description: 'High-purity methanol for industrial applications' },
+  { id: '1', name: 'Urea', category: 'Fertilizer', slug: 'urea', image: '/images/products/product1.svg', description: 'High-grade urea for nitrogen nutrition in crops' },
+  { id: '2', name: 'DAP', category: 'Fertilizer', slug: 'dap', image: '/images/products/product2.svg', description: 'Diammonium Phosphate for phosphorus and nitrogen' },
+  { id: '3', name: 'Ammonium Sulphate', category: 'Chemical', slug: 'ammonium-sulphate', image: '/images/products/product3.svg', description: 'Industrial-grade ammonium sulphate' },
+  { id: '4', name: 'Methanol', category: 'Chemical', slug: 'methanol', image: '/images/products/product4.svg', description: 'High-purity methanol for industrial applications' },
   { id: '5', name: 'Complex Fertilizers', category: 'Fertilizer', slug: 'complex-fertilizers', description: 'NPK complex fertilizers for balanced nutrition' },
   { id: '6', name: 'Formic Acid', category: 'Chemical', slug: 'formic-acid', description: 'Specialty chemicals for downstream industries' },
 ]

@@ -136,21 +136,21 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div className="govt-border-block text-center p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
               <div className="aspect-square bg-gray-100 mb-4 overflow-hidden rounded-xl border border-gray-200">
-                <SafeImage src="/images/ministers/modi.png" alt="Shri. Narendra Modi" className="w-full h-full object-cover" />
+                <SafeImage src="/images/ministers/modi.svg" alt="Shri. Narendra Modi" className="w-full h-full object-cover" />
               </div>
               <h3 className="text-base font-bold text-gray-900">Shri. Narendra Modi</h3>
               <p className="text-xs text-gray-500 uppercase tracking-wider mt-1">Hon'ble Prime Minister</p>
             </div>
             <div className="govt-border-block text-center p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
               <div className="aspect-square bg-gray-100 mb-4 overflow-hidden rounded-xl border border-gray-200">
-                <SafeImage src="/images/ministers/nadda.png" alt="Shri. Jagat Prakash Nadda" className="w-full h-full object-cover" />
+                <SafeImage src="/images/ministers/nadda.svg" alt="Shri. Jagat Prakash Nadda" className="w-full h-full object-cover" />
               </div>
               <h3 className="text-base font-bold text-gray-900">Shri. Jagat Prakash Nadda</h3>
               <p className="text-xs text-gray-500 uppercase tracking-wider mt-1">Hon'ble Minister of Chemicals & Fertilizers</p>
             </div>
             <div className="govt-border-block text-center p-6 bg-white rounded-2xl shadow-sm hover:shadow-md transition-shadow">
               <div className="aspect-square bg-gray-100 mb-4 overflow-hidden rounded-xl border border-gray-200">
-                <SafeImage src="/images/ministers/anupriya.png" alt="Ms. Anupriya Patel" className="w-full h-full object-cover" />
+                <SafeImage src="/images/ministers/anupriya.svg" alt="Ms. Anupriya Patel" className="w-full h-full object-cover" />
               </div>
               <h3 className="text-base font-bold text-gray-900">Ms. Anupriya Patel</h3>
               <p className="text-xs text-gray-500 uppercase tracking-wider mt-1">Hon'ble Minister of State Chemicals & Fertilizers</p>
@@ -273,7 +273,7 @@ export default function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {[1, 2, 3, 4].map((num) => (
               <div key={num} className="aspect-video bg-gray-100 overflow-hidden border border-gray-200 rounded-xl">
-                <SafeImage src={`/images/kisan/${num}.png`} alt={`Kisan Samriddhi ${num}`} className="w-full h-full object-cover" />
+                <SafeImage src={`/images/kisan/${num}.svg`} alt={`Kisan Samriddhi ${num}`} className="w-full h-full object-cover" />
               </div>
             ))}
           </div>
@@ -287,9 +287,9 @@ export default function HomePage() {
             <h2 className="section-title">Gallery</h2>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((num) => (
+            {[1, 2, 3, 4].map((num) => (
               <div key={num} className="aspect-square bg-gray-100 overflow-hidden border border-gray-200 rounded-xl">
-                <SafeImage src={`/images/gallery/${num}.jpg`} alt={`Gallery ${num}`} className="w-full h-full object-cover" />
+                <SafeImage src={`/images/gallery/${num}.svg`} alt={`Gallery ${num}`} className="w-full h-full object-cover" />
               </div>
             ))}
           </div>
