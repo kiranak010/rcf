@@ -19,6 +19,10 @@ module.exports = {
         'rcf-sky': '#0ea5e9',
         'rcf-navy': '#1e3a8a',
         'rcf-navy-dark': '#1e40af',
+        primary: {
+          DEFAULT: '#15803d',
+          foreground: '#ffffff',
+        },
       },
       fontFamily: {
         sans: ['Roboto', 'Arial', 'sans-serif'],
