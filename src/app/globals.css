@@ -12,6 +12,7 @@
   --rcf-soil: #92400e;
   --rcf-gold: #eab308;
   --rcf-harvest: #f59e0b;
+  --rcf-saffron: #ff8c25;
   --rcf-sky: #0ea5e9;
   --rcf-navy: #1e3a8a;
   --rcf-navy-dark: #1e40af;
@@ -199,8 +200,8 @@ body {
 }
 
 .saffron-stripe {
-  height: 4px;
-  background: linear-gradient(to right, var(--rcf-gold), var(--rcf-harvest), var(--rcf-gold));
+  height: 6px;
+  background: linear-gradient(to right, #ff9933, #ffffff, #138a36);
 }
 
 .govt-header-bar {
@@ -244,7 +245,19 @@ body {
   color: var(--rcf-green-dark);
   text-transform: uppercase;
   letter-spacing: 0.04em;
+  position: relative;
   margin-bottom: 0.5rem;
+}
+
+.govt-section-heading::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 48px;
+  height: 2px;
+  background: var(--rcf-gold);
 }
 
 .govt-panel {

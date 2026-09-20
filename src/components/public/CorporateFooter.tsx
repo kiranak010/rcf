@@ -55,7 +55,7 @@ export default function CorporateFooter() {
 
   return (
     <footer className="govt-footer">
-      <div className="h-1 bg-gradient-to-r from-green-600 via-green-500 to-green-600" />
+      <div className="h-1 bg-gradient-to-r from-rcf-gold via-rcf-harvest to-rcf-gold" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">

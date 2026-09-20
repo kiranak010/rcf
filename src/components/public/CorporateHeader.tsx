@@ -96,7 +96,7 @@ export default function CorporateHeader() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="px-3 py-2 text-xs font-medium text-gray-700 hover:text-white hover:bg-gray-900 transition-colors"
+                  className="px-3 py-2 text-xs font-medium text-gray-700 hover:text-white hover:bg-rcf-green-dark transition-colors"
                 >
                   {item.name}
                 </Link>
